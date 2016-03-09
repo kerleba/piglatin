@@ -24,8 +24,6 @@ namespace App;
 
 use Nette;
 
-define('SUFFIX', 'ay');
-
 class Translator extends Nette\Object {
 
     const SUFFIX = 'ay';
@@ -40,16 +38,16 @@ class Translator extends Nette\Object {
             return '';
         }
         //start with wovels or silent letters
-        if (preg_match('/^([aeiouy]|exh|gh|kn|ph|ps|rh|sce|sci|wr)/' ,$word)) {
-            return $word . $separator . 'h' . SUFFIX;
+        if (preg_match('/^([aeiouy]|exh|gh|kn|ph|ps|rh|sce|sci|wr)/i' ,$word)) {
+            return $word . $separator . 'h' . Translator::SUFFIX;
         }
         else {
             $consonants = '';
-            while (!preg_match('/^[aeiouy]/', $word)) {
+            while (!preg_match('/^[aeiouy]/i', $word)) {
                 $consonants .= $word[0];
                 $word = substr($word, 1, strlen($word) - 1);
             }
-            return $word . $separator . $consonants . SUFFIX;
+            return $word . $separator . $consonants . Translator::SUFFIX;
         }
     }
 }

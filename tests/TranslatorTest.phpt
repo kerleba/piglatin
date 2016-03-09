@@ -19,7 +19,7 @@ class TranslatorTests extends Tester\TestCase {
     /** @var Translator $translator */
     private $translator;
 
-    public function __construct() {
+    public function setUp() {
         $this->translator = new Translator();
     }
 
@@ -52,6 +52,5 @@ class TranslatorTests extends Tester\TestCase {
     }
 }
 
-$testCase = new TranslatorTests;
-$testCase->run();
+(new TranslatorTests)->run();
 

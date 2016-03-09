@@ -6,21 +6,17 @@ use Nette\Application\UI;
 use App\Translator;
 
 
-define('SEPARATOR', ['-', '´', '']);
 
 class HomepagePresenter extends UI\Presenter
 {
-    /**
-     * @var Translator
-     */
-    private $translator;
+
+    const SEPARATOR = ['-', '´', ''];
 
     /**
      * @return UI\Form
      */
     protected function createComponentTranslationForm()
     {
-        $this->translator = new Translator();
         $form = new UI\Form;
         $form->addText('text', 'Insert text for translation:');
         $form->addSubmit('translate', 'Translate');
@@ -35,6 +31,6 @@ class HomepagePresenter extends UI\Presenter
      * @param $values
      */
     public function translationFormSucceeded(UI\Form $form, $values) {
-        $form['translated']->setvalue($this->translator->translate($values['text'], SEPARATOR[$values['separator']]));
+        $form['translated']->setvalue((new Translator())->translate($values['text'], HomepagePresenter::SEPARATOR[$values['separator']]));
     }
 }
